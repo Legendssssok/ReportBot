@@ -31,6 +31,7 @@ def get_reason(text):
 async def main(message):
      try:
          config = json.load(open("config.json"))
+         print(config)
      except Exception as e:
          print(f"Error loading config file: {e}")
          sys.exit(1)
