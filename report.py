@@ -68,7 +68,7 @@ async def main(message):
                                     )
 
             try:
-                result = await app.send(report_peer)
+                result = await app.invoke(report_peer)
                 print(result, 'Reported by Account', Name)
                  
             except BaseException as e:
