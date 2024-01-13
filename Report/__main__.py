@@ -3,7 +3,7 @@ from pyrogram import (
     __version__
 )
 from pyrogram.raw.all import layer
-from ..Config import Config
+from .Config import Config
 import logging
 from datetime import datetime
 import logging.config, os
