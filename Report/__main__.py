@@ -9,7 +9,7 @@ from datetime import datetime
 import logging.config, os
 from pytz import timezone
 from aiohttp import web
-from plugins import web_server
+from .plugins import web_server
 import pyromod
 
 logging.config.fileConfig('logging.conf')
