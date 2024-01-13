@@ -4,7 +4,7 @@ from pyrogram import Client, filters
 from pyrogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup
 
 from info import Txt
-from ..Config import *
+from ..Config import Config
 
 @Client.on_message(filters.private & filters.command('start'))
 async def handle_start(bot:Client, message:Message):
