@@ -31,7 +31,6 @@ def get_reason(text):
 async def main(message):
      try:
          config = json.load(open("config.json"))
-         print(config)
      except Exception as e:
          print(f"Error loading config file: {e}")
          sys.exit(1)
@@ -40,9 +39,12 @@ async def main(message):
     # resportreason = input("whats ur pepoet reason: ")
      
      pee = config['Target']
+     print(pee)
      for account in config["accounts"]:
         string = account["Session_String"]
         Name = account['OwnerName']
+        print(string)
+        print(Name)
         async with Client(name="Session", session_string=string) as app:
             try:
                 #await app.get_chat(-1001433138571)
@@ -51,7 +53,7 @@ async def main(message):
                 access_hash = peer.access_hash
                 channel = InputPeerChannel(channel_id=peer_id, access_hash=access_hash)
             except Exception as e:
-                print(e)
+                print(f"Error 1: {e}")
             # elif dat.lower() == "user":
             #     peer = await app.resolve_peer(pee)
                 
@@ -70,7 +72,7 @@ async def main(message):
                 print(result, 'Reported by Account', Name)
                  
             except BaseException as e:
-                print(e)
+                print(f"Error2 : {e}")
                 print("failed to report from :", Name)
             
                 
