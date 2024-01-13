@@ -29,7 +29,11 @@ def get_reason(text):
 #report = app.send(report_peer)
 
 async def main(message):
-     config = (json.load(open("config.json")))
+     try:
+         config = json.load(open("config.json"))
+     except Exception as e:
+         print(f"Error loading config file: {e}")
+         sys.exit(1)
      resportreaso = message
      resportreason = get_reason(message)
     # resportreason = input("whats ur pepoet reason: ")
