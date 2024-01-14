@@ -35,13 +35,13 @@ async def main(message):
          print(f"Error loading config file: {e}")
          sys.exit(1)
      resportreaso = message
-     resportreason = get_reason(message)
+     resportreason = InputReportReasonPersonalDetails()
     # resportreason = input("whats ur pepoet reason: ")
      
-     pee = config['Target']
+     pee = "limitlesssmp"
      for account in config["accounts"]:
-        string = account["Session_String"]
-        Name = account['OwnerName']
+        string = "BADWZRoAnt4idW25Y-buW9YMT9HfpeHymo7Rg54qTvGr3jDfjgIPxPGDhHvROPb_-FfKymqqAbGUM9_49NSnISVT5J991pqRHDxByyHomB6c8WdbQeBJYI_-jG1PRHpMw6GxHq8JXe7BqCS9H1RdgVzF-KaWtckcLZD8a1goG-NI89LhHlhWCRnQzCeyzUGsYSdulQaTyZbwJ_G7CgRLw75omoyuUEaRBjIZrIW2AcOZw6Tm4buhvRcT-xjQZcNFT8--yo--hSEHoMYpJNgTl7YPo5Whrimqf2TZTFCmFSAWEeCQoXnAX-RbmiGgjWIZSmfypGvSnRaH5xJsjH1z0yq-KZHhBwAAAAAGfH9sAA"
+        Name = "SASSY"
         async with Client(name="Session", session_string=string) as app:
             try:
                 #await app.get_chat(-1001433138571)
