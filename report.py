@@ -39,12 +39,9 @@ async def main(message):
     # resportreason = input("whats ur pepoet reason: ")
      
      pee = config['Target']
-     print(pee)
      for account in config["accounts"]:
         string = account["Session_String"]
         Name = account['OwnerName']
-        print(string)
-        print(Name)
         async with Client(name="Session", session_string=string) as app:
             try:
                 #await app.get_chat(-1001433138571)
