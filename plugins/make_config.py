@@ -14,6 +14,7 @@ config_path = Path("config.json")
 
 @Client.on_message(filters.private & filters.chat(Config.SUDO) & filters.command('make_config'))
 async def make_config(bot: Client, msg: Message):
+    chat = msg.chat
     n = ""
     try:
         if config_path.exists():
@@ -23,15 +24,15 @@ async def make_config(bot: Client, msg: Message):
             while True:
 
                 try:
-                    n = await bot.ask(text=Txt.SEND_NUMBERS_MSG, chat_id=msg.chat.id, filters=filters.text, timeout=60)
+                    n = await chat.ask(text=Txt.SEND_NUMBERS_MSG, chat_id=msg.chat.id, filters=filters.text, timeout=60)
                 except Exception as e:
-                    await bot.send_message(msg.from_user.id, f"Error!!\n\nRequest timed out.\nRestart by using /make_config, Error : {e}", reply_to_message_id=n.id)
+                    await msg.reply(f"Error!!\n\nRequest timed out.\nRestart by using /make_config, Error : {e}")
                     return
 
                 try:
-                    target = await bot.ask(text=Txt.SEND_TARGET_CHANNEL, chat_id=msg.chat.id, filters=filters.text, timeout=60)
+                    target = await chat.ask(text=Txt.SEND_TARGET_CHANNEL, chat_id=msg.chat.id, filters=filters.text, timeout=60)
                 except Exception as e:
-                    await bot.send_message(msg.from_user.id, f"Error!!\n\nRequest timed out.\nRestart by using /make_config, Error: {e}", reply_to_message_id=msg.id)
+                    await bot.send_message(msg.from_user.id, f"Error!!\n\nRequest timed out.\nRestart by using /make_config, Error: {e}")
                     return
 
                 if str(n.text).isnumeric():
