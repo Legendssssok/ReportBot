@@ -14,6 +14,7 @@ config_path = Path("config.json")
 
 @Client.on_message(filters.private & filters.chat(Config.SUDO) & filters.command('make_config'))
 async def make_config(bot: Client, msg: Message):
+    n = ""
     try:
         if config_path.exists():
             return await msg.reply_text(text="**You have already made a config first delete it then you'll able to make it config**\n\n Use /del_config", reply_to_message_id=msg.id)
