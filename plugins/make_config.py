@@ -24,15 +24,14 @@ async def make_config(bot: Client, msg: Message):
 
                 try:
                     n = await bot.ask(text=Txt.SEND_NUMBERS_MSG, chat_id=msg.chat.id, filters=filters.text, timeout=60)
-                except:
-                    await bot.send_message(msg.from_user.id, "Error!!\n\nRequest timed out.\nRestart by using /make_config", reply_to_message_id=n.id)
+                except Exception as e:
+                    await bot.send_message(msg.from_user.id, f"Error!!\n\nRequest timed out.\nRestart by using /make_config, Error : {e}", reply_to_message_id=n.id)
                     return
 
                 try:
                     target = await bot.ask(text=Txt.SEND_TARGET_CHANNEL, chat_id=msg.chat.id, filters=filters.text, timeout=60)
-                except:
-
-                    await bot.send_message(msg.from_user.id, "Error!!\n\nRequest timed out.\nRestart by using /make_config", reply_to_message_id=msg.id)
+                except Exception as e:
+                    await bot.send_message(msg.from_user.id, f"Error!!\n\nRequest timed out.\nRestart by using /make_config, Error: {e}", reply_to_message_id=msg.id)
                     return
 
                 if str(n.text).isnumeric():
