@@ -1,1 +1,1 @@
-web: python3 -m Report
+web: python main.py

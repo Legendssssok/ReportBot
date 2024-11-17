@@ -1,3 +1,20 @@
+import os
+import time
+
+class Config(object):
+    # Pyrogram Client
+    API_ID    = int(os.environ.get("API_ID", "24509589"))  # ⚠️ Required
+    API_HASH  = os.environ.get("API_HASH", "717cf21d94c4934bcbe1eaa1ad86ae75") # ⚠️ Required
+    BOT_TOKEN = os.environ.get("BOT_TOKEN", "7660912667:AAGvcq65PodyM2xcYhBR3J2D2PWPElU0hQ0") # ⚠️ Required
+    
+    # Other Configs
+    BOT_START_TIME = time.time()
+    OWNER    = int(os.environ.get("OWNER", "5591734243"))  # ⚠️ Required
+    SUDO = list(map(int, os.environ.get("SUDO", "5591734243 7286700186").split()))  # ⚠️ Required
+    # Web Response Config
+    WEBHOOK = bool(os.environ.get("WEBHOOK", True))
+    PORT = int(os.environ.get("PORT", "8080"))
+
 class Txt(object):
 
     SEND_NUMBERS_MSG = """
@@ -9,13 +26,13 @@ class Txt(object):
     SEND_TARGET_CHANNEL = """
 ( SEND THE TARGET CHANNEL LINK or USERNAME)
 
-☛ For e.g :- <code> @ </code> or <code> https:/t.me/ShopSphereOwnerBot </code>
+☛ For e.g :- <code> @ </code> or <code> https:/t.me/username </code>
 """
 
     SEND_SESSION_MSG = """
 ❪ SEND SESSOIN STRING ❫
 
-☛ Generate Session String form @ShopSphereOwnerBot
+☛ Generate Session String form @
 
 
 """
@@ -62,10 +79,14 @@ Your have added {} accounts 👥
 7. Report for offensive person detail
 8. Reason for Pornography
 9. Report for spam
+0. Report for others
 
-Whats your  reason: select 1-9 👇 
+Whats your  reason: select 1-10 👇 
 """
-
+    MSG_REPORT_FORMAT  = """
+    Send me the message id number like this : 3243 54432 55334
+    """
+    
     SEND_NO_OF_REPORT_MSG = """
 ❪ SELECT NUMBER OF REPORTS 👤 ❫
 
@@ -79,7 +100,7 @@ Hɪ {},
 
 Tʜɪs Bᴏᴛ ɪs ғᴏʀ ᴛᴏ ʀᴇᴘᴏʀᴛ ᴄʜᴀɴɴᴇʟ ᴏʀ ɢʀᴏᴜᴘ ɪɴ ᴍᴀss ʟᴇᴠᴇʟ ᴛʜʀᴏᴜɢʜ ᴛᴇʟᴇɢʀᴀᴍ ᴀᴄᴄᴏᴜɴᴛ sᴇssɪᴏɴ sᴛʀɪɴɢ ᴡʜɪᴄʜ ʏᴏᴜ ᴄᴀɴ ɢᴇɴᴇʀᴀᴛᴇ ʙʏ @
 
-Tʜɪs ʙᴏᴛ ɪs sᴏʟᴇʟʏ ᴄʀᴇᴀᴛᴇ ᴏʀ ᴅᴇᴠᴇʟᴏᴘᴇᴅ ʙʏ :- @ShopSphereBot
+Tʜɪs ʙᴏᴛ ɪs sᴏʟᴇʟʏ ᴄʀᴇᴀᴛᴇ ᴏʀ ᴅᴇᴠᴇʟᴏᴘᴇᴅ ʙʏ :- @LegendDevs
 """
 
     HELP_MSG = """
@@ -93,6 +114,7 @@ Tʜɪs ʙᴏᴛ ɪs sᴏʟᴇʟʏ ᴄʀᴇᴀᴛᴇ ᴏʀ ᴅᴇᴠᴇʟᴏᴘ�
 ⏣ /see_accounts - See all the accounts you added
 ⏣ /add_account - Add new accounts
 ⏣ /report - Report the target
+⏣ /reportmsg - Report the message of target 
 ⏣ /restart - Restart the bot
 
 💢 Features:
@@ -107,7 +129,7 @@ Tʜɪs ʙᴏᴛ ɪs sᴏʟᴇʟʏ ᴄʀᴇᴀᴛᴇ ᴏʀ ᴅᴇᴠᴇʟᴏᴘ�
 
     ABOUT_MSG = """
 - 𝖬𝗒 𝖭𝖺𝗆𝖾 : <a href=https://t.me/{}>{}</a>
-- 𝖢𝗋𝖾𝖺𝗍𝗈𝗋 : <a href=@ShopSphereOwnerBot</a>
+- 𝖢𝗋𝖾𝖺𝗍𝗈𝗋 : <a href=@LegendDevs</a>
 - 𝖫𝗂𝖻𝗋𝖺𝗋𝗒 : Pyrogram
 - 𝖫𝖺𝗇𝗀𝗎𝖺𝗀𝖾 : 𝖯𝗒𝗍𝗁𝗈𝗇 𝟥
 - 𝖣𝖺𝗍𝖺𝖡𝖺𝗌𝖾 : 𝖬𝗈𝗇𝗀𝗈𝖣𝖡
