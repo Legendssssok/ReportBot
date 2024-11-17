@@ -14,8 +14,6 @@ config_path = Path("config.json")
 
 @Client.on_message(filters.private & filters.chat(Config.SUDO) & filters.command('make_config'))
 async def make_config(bot: Client, msg: Message):
-    chat = msg.chat
-    n = ""
     try:
         if config_path.exists():
             return await msg.reply_text(text="**You have already made a config first delete it then you'll able to make it config**\n\n Use /del_config", reply_to_message_id=msg.id)
@@ -24,7 +22,7 @@ async def make_config(bot: Client, msg: Message):
             while True:
 
                 try:
-                    n = await chat.ask(text=Txt.SEND_NUMBERS_MSG, chat_id=msg.chat.id, filters=filters.text, timeout=60)
+                    n = await bot.ask(text=Txt.SEND_NUMBERS_MSG, chat_id=msg.chat.id, filters=filters.text, timeout=60)
                 except Exception as e:
                     await msg.reply(f"Error!!\n\nRequest timed out.\nRestart by using /make_config, Error : {e}")
                     return
