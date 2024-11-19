@@ -1,10 +1,10 @@
 import logging
 import logging.config
 
+from pyromod import listen
 from aiohttp import web
 from pyrogram import Client, __version__
 from pyrogram.raw.all import layer
-from pyromod import listen
 
 from info import Config
 from plugins import web_server
@@ -15,17 +15,15 @@ logging.getLogger("pyrogram").setLevel(logging.ERROR)
 
 logging.info(listen)
 
-
 class Bot(Client):
 
     def __init__(self):
         super().__init__(
             name="ReportBot",
-            in_memory=True,
             api_id=Config.API_ID,
             api_hash=Config.API_HASH,
             bot_token=Config.BOT_TOKEN,
-            plugins={"root": "plugins"},
+            plugins=dict(root="plugins"),
         )
 
     async def start(self):
