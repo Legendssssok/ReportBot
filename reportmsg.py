@@ -24,20 +24,30 @@ def get_reason(text, message_ids):
         message_ids_list = list(map(int, message_ids.split()))
     except ValueError:
         message_ids_list = [int(message_ids)]
-    
+
     reasons = {
         "Report for child abuse": (InputReportReasonChildAbuse(), message_ids_list),
         "Report for impersonation": (InputReportReasonFake(), message_ids_list),
-        "Report for copyrighted content": (InputReportReasonCopyright(), message_ids_list),
-        "Report an irrelevant geogroup": (InputReportReasonGeoIrrelevant(), message_ids_list),
+        "Report for copyrighted content": (
+            InputReportReasonCopyright(),
+            message_ids_list,
+        ),
+        "Report an irrelevant geogroup": (
+            InputReportReasonGeoIrrelevant(),
+            message_ids_list,
+        ),
         "Reason for Pornography": (InputReportReasonPornography(), message_ids_list),
         "Report an illegal drug": (InputReportReasonIllegalDrugs(), message_ids_list),
-        "Report for offensive person detail": (InputReportReasonPersonalDetails(), message_ids_list),
+        "Report for offensive person detail": (
+            InputReportReasonPersonalDetails(),
+            message_ids_list,
+        ),
         "Report for spam": (InputReportReasonSpam(), message_ids_list),
         "Report for Violence": (InputReportReasonViolence(), message_ids_list),
         "Report for other": (InputReportReasonOther(), message_ids_list),
     }
     return reasons.get(text, (InputReportReasonOther(), message_ids_list))
+
 
 async def main(message, message_ids):
     print(message, message_ids)
