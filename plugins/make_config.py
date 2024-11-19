@@ -27,8 +27,8 @@ async def make_config(bot: Client, msg: Message):
             while True:
 
                 try:
+                    await msg.reply_text(Txt.SEND_NUMBERS_MSG, reply_to_message_id=msg.id)
                     n = await bot.listen(
-                        text=Txt.SEND_NUMBERS_MSG,
                         chat_id=msg.chat.id,
                         filters=filters.text,
                         timeout=60,
@@ -40,15 +40,14 @@ async def make_config(bot: Client, msg: Message):
                     return
 
                 try:
-                    target = await chat.ask(
-                        text=Txt.SEND_TARGET_CHANNEL,
+                    await msg.reply_text(Txt.SEND_TARGET_CHANNEL)
+                    target = await bot.listen(
                         chat_id=msg.chat.id,
                         filters=filters.text,
                         timeout=60,
                     )
                 except Exception as e:
-                    await bot.send_message(
-                        msg.from_user.id,
+                    await msg.reply(
                         f"Error!!\n\nRequest timed out.\nRestart by using /make_config, Error: {e}",
                     )
                     return
