@@ -1,10 +1,10 @@
 import logging
 import logging.config
 
-from pyromod import listen
 from aiohttp import web
 from pyrogram import Client, __version__
 from pyrogram.raw.all import layer
+from pyromod import listen
 
 from info import Config
 from plugins import web_server
@@ -14,6 +14,7 @@ logging.getLogger().setLevel(logging.INFO)
 logging.getLogger("pyrogram").setLevel(logging.ERROR)
 
 logging.info(listen)
+
 
 class Bot(Client):
 
