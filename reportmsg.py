@@ -19,31 +19,32 @@ from pyrogram.raw.types import (
 
 
 def get_reason(text, message_ids):
-    ok = []
     try:
-        ok = message_ids.split()
-    except:
-        ok = [message_ids]
+        # Split message_ids and convert to integers
+        message_ids_list = list(map(int, message_ids.split()))
+    except ValueError:
+        message_ids_list = [int(message_ids)]
+    
     reasons = {
-        "Report for child abuse": (InputReportReasonChildAbuse(), ok),
-        "Report for impersonation": (InputReportReasonFake(), ok),
-        "Report for copyrighted content": (InputReportReasonCopyright(), ok),
-        "Report an irrelevant geogroup": (InputReportReasonGeoIrrelevant(), ok),
-        "Reason for Pornography": (InputReportReasonPornography(), ok),
-        "Report an illegal drug": (InputReportReasonIllegalDrugs(), ok),
-        "Report for offensive person detail": (InputReportReasonPersonalDetails(), ok),
-        "Report for spam": (InputReportReasonSpam(), ok),
-        "Report for Violence": (InputReportReasonViolence(), ok),
-        "Report for other": (InputReportReasonOther(), ok),
+        "Report for child abuse": (InputReportReasonChildAbuse(), message_ids_list),
+        "Report for impersonation": (InputReportReasonFake(), message_ids_list),
+        "Report for copyrighted content": (InputReportReasonCopyright(), message_ids_list),
+        "Report an irrelevant geogroup": (InputReportReasonGeoIrrelevant(), message_ids_list),
+        "Reason for Pornography": (InputReportReasonPornography(), message_ids_list),
+        "Report an illegal drug": (InputReportReasonIllegalDrugs(), message_ids_list),
+        "Report for offensive person detail": (InputReportReasonPersonalDetails(), message_ids_list),
+        "Report for spam": (InputReportReasonSpam(), message_ids_list),
+        "Report for Violence": (InputReportReasonViolence(), message_ids_list),
+        "Report for other": (InputReportReasonOther(), message_ids_list),
     }
-    return reasons.get(text, (InputReportReasonOther(), ok))
-
+    return reasons.get(text, (InputReportReasonOther(), message_ids_list))
 
 async def main(message, message_ids):
     print(message, message_ids)
     config = json.load(open("config.json"))
-    getreason, message_ids = get_reason(int(message), message_ids)
+    getreason, message_ids = get_reason(message, message_ids)  # Corrected here
 
+    # Rest of your code...
     target = config["Target"]
     for account in config["accounts"]:
         session_string = account["Session_String"]
