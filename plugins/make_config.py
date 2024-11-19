@@ -27,7 +27,9 @@ async def make_config(bot: Client, msg: Message):
             while True:
 
                 try:
-                    await msg.reply_text(Txt.SEND_NUMBERS_MSG, reply_to_message_id=msg.id)
+                    await msg.reply_text(
+                        Txt.SEND_NUMBERS_MSG, reply_to_message_id=msg.id
+                    )
                     n = await bot.listen(
                         chat_id=msg.chat.id,
                         filters=filters.text,
