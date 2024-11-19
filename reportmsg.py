@@ -1,23 +1,22 @@
-import sys
-from pyrogram import Client, enums, filters
 import asyncio
 import json
-from pyrogram.raw.functions.account import ReportPeer
+import sys
+
+from pyrogram import Client
+from pyrogram.raw.functions.messages import Report
 from pyrogram.raw.types import (
     InputReportReasonChildAbuse,
-    InputReportReasonFake,
     InputReportReasonCopyright,
+    InputReportReasonFake,
     InputReportReasonGeoIrrelevant,
-    InputReportReasonPornography,
     InputReportReasonIllegalDrugs,
-    InputReportReasonSpam,
-    InputReportReasonPersonalDetails,
-    InputReportReasonViolence,
     InputReportReasonOther,
-    InputPeerChannel
+    InputReportReasonPersonalDetails,
+    InputReportReasonPornography,
+    InputReportReasonSpam,
+    InputReportReasonViolence,
 )
 
-from pyrogram.raw.functions.messages import Report
 
 def get_reason(text, message_ids):
     ok = []
@@ -35,7 +34,7 @@ def get_reason(text, message_ids):
         "Report for offensive person detail": (InputReportReasonPersonalDetails(), ok),
         "Report for spam": (InputReportReasonSpam(), ok),
         "Report for Violence": (InputReportReasonViolence(), ok),
-        "Report for other": (InputReportReasonOther(), ok)
+        "Report for other": (InputReportReasonOther(), ok),
     }
     return reasons.get(text, (InputReportReasonOther(), ok))
 
@@ -45,10 +44,10 @@ async def main(message, message_ids):
     config = json.load(open("config.json"))
     getreason, message_ids = get_reason(int(message), message_ids)
 
-    target = config['Target']
+    target = config["Target"]
     for account in config["accounts"]:
         session_string = account["Session_String"]
-        account_name = account['OwnerName']
+        account_name = account["OwnerName"]
         async with Client(name="Session", session_string=session_string) as app:
             try:
                 peer = await app.resolve_peer(target)
@@ -57,7 +56,12 @@ async def main(message, message_ids):
                 continue
 
             try:
-                report = Report(peer=peer, id=message_ids, reason=getreason, message="This user is sending spam messages")
+                report = Report(
+                    peer=peer,
+                    id=message_ids,
+                    reason=getreason,
+                    message="This user is sending spam messages",
+                )
                 result = await app.invoke(report)
                 print(f"Successfully reported by account {account_name}: {result}")
             except Exception as e:

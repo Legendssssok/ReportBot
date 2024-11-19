@@ -1,24 +1,20 @@
-from pyrogram import (
-    Client,
-    __version__
-)
-from pyrogram.raw.all import layer
-from info import Config
 import logging
-from datetime import datetime
-import logging.config, os
-from pytz import timezone
-from aiohttp import web
-from plugins import web_server
-import pyromod
+import logging.config
 
-logging.config.fileConfig('logging.conf')
+import pyromod
+from aiohttp import web
+from pyrogram import Client, __version__
+from pyrogram.raw.all import layer
+
+from info import Config
+from plugins import web_server
+
+logging.config.fileConfig("logging.conf")
 logging.getLogger().setLevel(logging.INFO)
 logging.getLogger("pyrogram").setLevel(logging.ERROR)
 
 
-
-class Bot (Client):
+class Bot(Client):
 
     def __init__(self):
         super().__init__(
@@ -27,7 +23,7 @@ class Bot (Client):
             api_id=Config.API_ID,
             api_hash=Config.API_HASH,
             bot_token=Config.BOT_TOKEN,
-            plugins={'root': 'plugins'}
+            plugins={"root": "plugins"},
         )
 
     async def start(self):
@@ -40,12 +36,14 @@ class Bot (Client):
         bind_address = "0.0.0.0"
         logging.info(pyromod.listen)
         await web.TCPSite(app, bind_address, Config.PORT).start()
-        logging.info(f"✅ {me.first_name} with for Pyrogram v{__version__} (Layer {layer}) started on {me.username}. ✅")
+        logging.info(
+            f"✅ {me.first_name} with for Pyrogram v{__version__} (Layer {layer}) started on {me.username}. ✅"
+        )
 
+        await self.send_message(
+            Config.OWNER, f"**__{me.first_name}  𝖨𝖲 𝖲𝖳𝖠𝖱𝖳𝖤𝖣.....✨️__**"
+        )
 
-        await self.send_message(Config.OWNER, f"**__{me.first_name}  𝖨𝖲 𝖲𝖳𝖠𝖱𝖳𝖤𝖣.....✨️__**")
-
-        
     async def stop(self, *args):
         await super().stop()
         logging.info("𝖸𝖮𝖴𝖱 𝖡𝖮𝖳 𝖲𝖳𝖮𝖯𝖤𝖣 ⛔")

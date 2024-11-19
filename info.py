@@ -1,19 +1,27 @@
 import os
 import time
 
+
 class Config(object):
     # Pyrogram Client
-    API_ID    = int(os.environ.get("API_ID", "24509589"))  # ⚠️ Required
-    API_HASH  = os.environ.get("API_HASH", "717cf21d94c4934bcbe1eaa1ad86ae75") # ⚠️ Required
-    BOT_TOKEN = os.environ.get("BOT_TOKEN", "7660912667:AAGvcq65PodyM2xcYhBR3J2D2PWPElU0hQ0") # ⚠️ Required
-    
+    API_ID = int(os.environ.get("API_ID", "24509589"))  # ⚠️ Required
+    API_HASH = os.environ.get(
+        "API_HASH", "717cf21d94c4934bcbe1eaa1ad86ae75"
+    )  # ⚠️ Required
+    BOT_TOKEN = os.environ.get(
+        "BOT_TOKEN", "7660912667:AAGvcq65PodyM2xcYhBR3J2D2PWPElU0hQ0"
+    )  # ⚠️ Required
+
     # Other Configs
     BOT_START_TIME = time.time()
-    OWNER    = int(os.environ.get("OWNER", "5591734243"))  # ⚠️ Required
-    SUDO = list(map(int, os.environ.get("SUDO", "5591734243 7286700186").split()))  # ⚠️ Required
+    OWNER = int(os.environ.get("OWNER", "5591734243"))  # ⚠️ Required
+    SUDO = list(
+        map(int, os.environ.get("SUDO", "5591734243 7286700186").split())
+    )  # ⚠️ Required
     # Web Response Config
     WEBHOOK = bool(os.environ.get("WEBHOOK", True))
     PORT = int(os.environ.get("PORT", "8080"))
+
 
 class Txt(object):
 
@@ -83,10 +91,10 @@ Your have added {} accounts 👥
 
 Whats your  reason: select 1-10 👇 
 """
-    MSG_REPORT_FORMAT  = """
+    MSG_REPORT_FORMAT = """
     Send me the message id number like this : 3243 54432 55334
     """
-    
+
     SEND_NO_OF_REPORT_MSG = """
 ❪ SELECT NUMBER OF REPORTS 👤 ❫
 

@@ -1,35 +1,63 @@
-import sys
-from pyrogram import Client, filters
 import asyncio
 import json
+import sys
+
+from pyrogram import Client
 from pyrogram.raw.functions.account import ReportPeer
 from pyrogram.raw.types import (
+    InputPeerChannel,
     InputReportReasonChildAbuse,
-    InputReportReasonFake,
     InputReportReasonCopyright,
+    InputReportReasonFake,
     InputReportReasonGeoIrrelevant,
-    InputReportReasonPornography,
     InputReportReasonIllegalDrugs,
-    InputReportReasonSpam,
-    InputReportReasonPersonalDetails,
-    InputReportReasonViolence,
     InputReportReasonOther,
-    InputPeerChannel
+    InputReportReasonPersonalDetails,
+    InputReportReasonPornography,
+    InputReportReasonSpam,
+    InputReportReasonViolence,
 )
 
 
 def get_reason(text):
     reasons = {
-        "Report for child abuse": (InputReportReasonChildAbuse(), "This group involves child abuse content."),
-        "Report for impersonation": (InputReportReasonFake(), "This group impersonates another person or entity."),
-        "Report for copyrighted content": (InputReportReasonCopyright(), "This group shares copyrighted content."),
-        "Report an irrelevant geogroup": (InputReportReasonGeoIrrelevant(), "This group targets irrelevant geographical areas."),
-        "Reason for Pornography": (InputReportReasonPornography(), "This group contains pornographic material."),
-        "Report an illegal drug": (InputReportReasonIllegalDrugs(), "This group promotes illegal drug activities."),
-        "Report for offensive person detail": (InputReportReasonPersonalDetails(), "This group shares offensive personal details."),
+        "Report for child abuse": (
+            InputReportReasonChildAbuse(),
+            "This group involves child abuse content.",
+        ),
+        "Report for impersonation": (
+            InputReportReasonFake(),
+            "This group impersonates another person or entity.",
+        ),
+        "Report for copyrighted content": (
+            InputReportReasonCopyright(),
+            "This group shares copyrighted content.",
+        ),
+        "Report an irrelevant geogroup": (
+            InputReportReasonGeoIrrelevant(),
+            "This group targets irrelevant geographical areas.",
+        ),
+        "Reason for Pornography": (
+            InputReportReasonPornography(),
+            "This group contains pornographic material.",
+        ),
+        "Report an illegal drug": (
+            InputReportReasonIllegalDrugs(),
+            "This group promotes illegal drug activities.",
+        ),
+        "Report for offensive person detail": (
+            InputReportReasonPersonalDetails(),
+            "This group shares offensive personal details.",
+        ),
         "Report for spam": (InputReportReasonSpam(), "This group sends spam messages."),
-        "Report for Violence": (InputReportReasonViolence(), "This group promotes or glorifies violence."),
-        "Report for other": (InputReportReasonOther(), "This group violates Telegram policies in other ways.")
+        "Report for Violence": (
+            InputReportReasonViolence(),
+            "This group promotes or glorifies violence.",
+        ),
+        "Report for other": (
+            InputReportReasonOther(),
+            "This group violates Telegram policies in other ways.",
+        ),
     }
     return reasons.get(text, (InputReportReasonOther(), "Unknown reason provided."))
 
@@ -38,10 +66,10 @@ async def main(message):
     config = json.load(open("config.json"))
     reason_type, reason_message = get_reason(message)
 
-    target = config['Target']
+    target = config["Target"]
     for account in config["accounts"]:
         session_string = account["Session_String"]
-        account_name = account['OwnerName']
+        account_name = account["OwnerName"]
         async with Client(name="Session", session_string=session_string) as app:
             try:
                 peer = await app.resolve_peer(target)
@@ -53,9 +81,7 @@ async def main(message):
                 continue
 
             report_peer = ReportPeer(
-                peer=channel,
-                reason=reason_type,
-                message=reason_message
+                peer=channel, reason=reason_type, message=reason_message
             )
 
             try:
