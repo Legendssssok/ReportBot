@@ -122,7 +122,7 @@ Tʜɪs ʙᴏᴛ ɪs sᴏʟᴇʟʏ ᴄʀᴇᴀᴛᴇ ᴏʀ ᴅᴇᴠᴇʟᴏᴘ�
 ⏣ /see_accounts - See all the accounts you added
 ⏣ /add_account - Add new accounts
 ⏣ /report - Report the target
-⏣ /reportmsg - Report the message of target 
+⏣ /msgreport - Report the message of target 
 ⏣ /restart - Restart the bot
 
 💢 Features:
