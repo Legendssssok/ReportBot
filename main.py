@@ -38,6 +38,7 @@ class Bot (Client):
         app = web.AppRunner(await web_server())
         await app.setup()
         bind_address = "0.0.0.0"
+        logging.info(pyromod.listen)
         await web.TCPSite(app, bind_address, Config.PORT).start()
         logging.info(f"✅ {me.first_name} with for Pyrogram v{__version__} (Layer {layer}) started on {me.username}. ✅")
 
