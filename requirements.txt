@@ -1,7 +1,7 @@
-Pyrogram
+pyrogram
 TgCrypto
 ujson
-Pyromod
+pyromod==1.5
 aiohttp
 pytz
 psutil
